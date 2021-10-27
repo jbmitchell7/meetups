@@ -92,7 +92,7 @@ module.exports.getCalendarEvents = async (event) => {
     redirect_uris[0]
   );
 
-  const access_token = decodeURIComponent(`${event.pathParameters.code}`);
+  const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
   oAuth2Client.setCredentials({ access_token });
 
   return new Promise((resolve, reject) => {
@@ -118,6 +118,7 @@ module.exports.getCalendarEvents = async (event) => {
         statusCode: 200,
         headers: {
           "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
         },
         body: JSON.stringify({ events: results.data.items })
       };
