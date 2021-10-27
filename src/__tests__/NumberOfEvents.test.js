@@ -11,24 +11,15 @@ describe('<NumberOfEvents /> component', () => {
     });
 
     test('render text display', () => {
-        expect(NumberOfEventsWrapper.find(".event-number")).toHaveLength(1);
+        expect(NumberOfEventsWrapper.find(".numbers").prop('value')).toEqual(32);
     });
 
-    // test('renders a list of suggestions', () => {
-    //     expect(NumberOfEventsWrapper.find('.suggestions')).toHaveLength(1);
-    // });
-
-    // test('renders text input correctly', () => {
-    //     const query = NumberOfEventsWrapper.state('query');
-    //     expect(NumberOfEventsWrapper.find('.city').prop('value')).toBe(query);
-    // });
-
-    // test('change state when text input changes', () => {
-    //     NumberOfEventsWrapper.setState({
-    //         query: 'Munich'
-    //     });
-    //     const eventObject = { target: { value: 'Berlin' } };
-    //     NumberOfEventsWrapper.find('.city').simulate('change', eventObject);
-    //     expect(NumberOfEventsWrapper.state('query')).toBe('Berlin');
-    // });
+    test('change state when text input changes', () => {
+        NumberOfEventsWrapper.setState({
+            numberOfEvents: 32
+        });
+        const numChange = { target: { value: 10 } };
+        NumberOfEventsWrapper.find('.numbers').simulate('change', numChange);
+        expect(NumberOfEventsWrapper.state('numberOfEvents')).toBe(10);
+    });
 })
