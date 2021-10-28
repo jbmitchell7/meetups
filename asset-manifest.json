@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/meetups/static/css/main.bce7d1ff.chunk.css",
-    "main.js": "/meetups/static/js/main.c72cd241.chunk.js",
-    "main.js.map": "/meetups/static/js/main.c72cd241.chunk.js.map",
+    "main.js": "/meetups/static/js/main.a00f34bb.chunk.js",
+    "main.js.map": "/meetups/static/js/main.a00f34bb.chunk.js.map",
     "runtime-main.js": "/meetups/static/js/runtime-main.c6b824e1.js",
     "runtime-main.js.map": "/meetups/static/js/runtime-main.c6b824e1.js.map",
     "static/js/2.cb3117fb.chunk.js": "/meetups/static/js/2.cb3117fb.chunk.js",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.c6b824e1.js",
     "static/js/2.cb3117fb.chunk.js",
     "static/css/main.bce7d1ff.chunk.css",
-    "static/js/main.c72cd241.chunk.js"
+    "static/js/main.a00f34bb.chunk.js"
   ]
 }
