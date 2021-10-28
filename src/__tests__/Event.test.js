@@ -12,10 +12,6 @@ describe('<Event /> component', () => {
     });
 
     test('collapsed is default event details behavior', () => {
-        // EventWrapper.setState({
-        //     collapsed: true
-        // });
-        //does state need to be set to test default behavior?
         expect(EventWrapper.find(".event-details")).toHaveLength(0);
     });
 
