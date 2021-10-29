@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import '../../nprogress.css';
 import './App.css';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
@@ -40,8 +41,8 @@ class App extends Component {
     return (
       <div className="App">
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <EventList events={this.state.events} />
         <NumberOfEvents />
+        <EventList events={this.state.events} />
       </div>
     )
   }
