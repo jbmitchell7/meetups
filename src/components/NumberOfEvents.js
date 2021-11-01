@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 
 class NumberOfEvents extends Component {
-    state = {
-        numberOfEvents: 32
-    }
 
     handleInputChanged = (event) => {
         const value = event.target.value;
-
-        this.setState({
-            numberOfEvents: value
-        });
+        this.props.updateCount(value);
     };
 
     render() {
-        const { numberOfEvents } = this.state;
+        const { numberOfEvents } = this.props;
         return (
             <div className="total-events-viewed">
                 <input
