@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Row } from 'react-bootstrap';
 
 import '../../nprogress.css';
 import './App.css';
-import EventList from '../EventList';
-import CitySearch from '../CitySearch';
-import NumberOfEvents from '../NumberOfEvents';
+import EventList from '../EventList/EventList';
+import CitySearch from '../CitySearch/CitySearch';
+import NumberOfEvents from '../NumberOfEvents/NumberOfEvents';
 import { extractLocations, getEvents } from '../../api';
 
 class App extends Component {
@@ -50,11 +51,11 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <Row className="app">
         <CitySearch locations={this.state.locations} numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
         <NumberOfEvents updateCount={this.updateCount} numberOfEvents={this.state.numberOfEvents} />
-        <EventList events={this.state.events} />
-      </div>
+        <EventList events={this.state.events.slice(0, this.state.numberOfEvents)} />
+      </Row>
     )
   }
 }

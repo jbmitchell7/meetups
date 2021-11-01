@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './NumberOfEvents.css';
+
 class NumberOfEvents extends Component {
 
     handleInputChanged = (event) => {
