@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Row } from 'react-bootstrap';
 
-import '../../nprogress.css';
+import './nprogress.css';
 import './App.css';
-import EventList from '../EventList/EventList';
-import CitySearch from '../CitySearch/CitySearch';
-import NumberOfEvents from '../NumberOfEvents/NumberOfEvents';
-import { extractLocations, getEvents } from '../../api';
+import EventList from './components/EventList/EventList';
+import CitySearch from './components/CitySearch/CitySearch';
+import NumberOfEvents from './components/NumberOfEvents/NumberOfEvents';
+import { extractLocations, getEvents } from './api';
+
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   state = {

@@ -24,7 +24,7 @@ class Event extends Component {
                 <Card.Text className="event-location">{event.location}</Card.Text>
                 <Card.Text className="event-start">{event.start.dateTime}</Card.Text>
                 <Card.Text className="event-end">{event.end.dateTime}</Card.Text>
-                <Button variant="primary" id="toggle-details" onClick={this.handleToggleDetails}>Show/Hide Details</Button>
+                <Button id="toggle-details" variant="primary" onClick={this.handleToggleDetails}>Show/Hide Details</Button>
 
                 {!collapsed && (
                     <Card.Text className="event-details">

@@ -42,7 +42,7 @@ describe('<Event /> component', () => {
         EventWrapper.setState({
             collapsed: true
         });
-        EventWrapper.find(".toggle-details").simulate('click');
+        EventWrapper.find("#toggle-details").simulate('click');
         expect(EventWrapper.find(".event-details")).toHaveLength(1);
     });
 
@@ -50,7 +50,7 @@ describe('<Event /> component', () => {
         EventWrapper.setState({
             collapsed: false
         });
-        EventWrapper.find(".toggle-details").simulate('click');
+        EventWrapper.find("#toggle-details").simulate('click');
         expect(EventWrapper.find(".event-details")).toHaveLength(0);
     });
 });
