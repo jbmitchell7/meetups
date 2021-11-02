@@ -13,6 +13,7 @@ class NumberOfEvents extends Component {
         const { numberOfEvents } = this.props;
         return (
             <div className="total-events-viewed">
+                <h6 className="search-heading">Select Number of Events to View</h6>
                 <input
                     type="text"
                     className="numbers"

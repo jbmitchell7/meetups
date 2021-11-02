@@ -7,5 +7,14 @@ html, body, body > div, .app {
 .app {
   padding: 30px;
   background-color: #2d007a;
-
 }
+
+.heading {
+  margin-bottom: 50px;
+}
+
+.heading, .search-heading {
+  color: white;
+  text-align: center;
+}
+

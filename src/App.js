@@ -51,11 +51,14 @@ class App extends Component {
 
   render() {
     return (
-      <Row className="app">
-        <CitySearch locations={this.state.locations} numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
-        <NumberOfEvents updateCount={this.updateCount} numberOfEvents={this.state.numberOfEvents} />
-        <EventList events={this.state.events.slice(0, this.state.numberOfEvents)} />
-      </Row>
+      <>
+        <Row className="app">
+          <h1 className="heading">Networking Meetups</h1>
+          <CitySearch locations={this.state.locations} numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
+          <NumberOfEvents updateCount={this.updateCount} numberOfEvents={this.state.numberOfEvents} />
+          <EventList events={this.state.events.slice(0, this.state.numberOfEvents)} />
+        </Row>
+      </>
     )
   }
 }
