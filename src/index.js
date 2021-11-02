@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Container>
+    <Container fluid>
       <App />
     </Container>
   </React.StrictMode>,

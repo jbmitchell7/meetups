@@ -11,10 +11,6 @@ describe('<Event /> component', () => {
         EventWrapper = shallow(<Event event={mockData[0]} />);
     });
 
-    test('collapsed is default event details behavior', () => {
-        expect(EventWrapper.find(".event-details")).toHaveLength(0);
-    });
-
     test('title is visible always', () => {
         expect(EventWrapper.find(".event-summary")).toHaveLength(1);
     });
@@ -27,15 +23,15 @@ describe('<Event /> component', () => {
         expect(EventWrapper.find(".event-location")).toHaveLength(1);
     });
 
-    test('description not visible by default', () => {
-        expect(EventWrapper.find(".event-description")).toHaveLength(0);
+    test('details not visible by default', () => {
+        expect(EventWrapper.find(".event-details")).toHaveLength(0);
     });
 
-    test('description is visible when not collapsed', () => {
+    test('details is visible when not collapsed', () => {
         EventWrapper.setState({
             collapsed: false
         });
-        expect(EventWrapper.find(".event-description")).toHaveLength(1);
+        expect(EventWrapper.find(".event-details")).toHaveLength(1);
     });
 
     test('clicking toggle details when collapsed should change collapsed to false', () => {

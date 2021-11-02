@@ -8,8 +8,6 @@ import CitySearch from './components/CitySearch/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents/NumberOfEvents';
 import { extractLocations, getEvents } from './api';
 
-//import 'bootstrap/dist/css/bootstrap.min.css';
-
 class App extends Component {
   state = {
     events: [],

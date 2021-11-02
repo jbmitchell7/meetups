@@ -15,23 +15,40 @@ class Event extends Component {
         });
     }
 
+    dateConvert = (date) => {
+        const year = date.substr(0, 4);
+        const month = date.substr(5, 2);
+        const day = date.substr(8, 2);
+        return `Date: ${month}-${day}-${year}`;
+    }
+
+    timeConvert = (date) => {
+        const time = date.substr(11, 5);
+        return `${time}`;
+    }
+
     render() {
         const { event } = this.props;
         const { collapsed } = this.state;
-        return (
-            <Card.Body className="event">
-                <Card.Title className="event-summary">{event.summary}</Card.Title>
-                <Card.Text className="event-location">{event.location}</Card.Text>
-                <Card.Text className="event-start">{event.start.dateTime}</Card.Text>
-                <Card.Text className="event-end">{event.end.dateTime}</Card.Text>
-                <Button id="toggle-details" variant="primary" onClick={this.handleToggleDetails}>Show/Hide Details</Button>
+        const startTime = this.timeConvert(event.start.dateTime);
+        const endTime = this.timeConvert(event.end.dateTime);
+        const date = this.dateConvert(event.start.dateTime);
 
-                {!collapsed && (
-                    <Card.Text className="event-details">
-                        <div className="event-description">{event.description}</div>
-                    </Card.Text>
-                )}
-            </Card.Body>
+        return (
+            <Card className="bg-dark text-white event">
+                <Card.Body className="event-body">
+                    <Card.Title className="event-summary" as="h2">{event.summary}</Card.Title>
+                    <Card.Text className="event-location">City: {event.location}</Card.Text>
+                    <Card.Text className="event-date">{date}</Card.Text>
+                    <Card.Text className="event-start-time">Start Time: {startTime}</Card.Text>
+                    <Card.Text className="event-end-time">End Time: {endTime}</Card.Text>
+                    <Button id="toggle-details" variant="info" onClick={this.handleToggleDetails}>Show/Hide Details</Button>
+
+                    {!collapsed && (
+                        <Card.Text className="event-details">{event.description}</Card.Text>
+                    )}
+                </Card.Body>
+            </Card>
         )
     }
 }

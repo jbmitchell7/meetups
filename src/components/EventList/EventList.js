@@ -10,7 +10,7 @@ class EventList extends Component {
         return (
             <>
                 {events.map(event =>
-                    <Col lg={4} md={6} key={event.id}>
+                    <Col xl={3} lg={4} md={6} key={event.id}>
                         <Event event={event} />
                     </Col>
                 )}
