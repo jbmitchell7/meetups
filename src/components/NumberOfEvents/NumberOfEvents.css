@@ -2,4 +2,12 @@
     width: 200px;
     margin: 20px auto;
     text-align: center;
-  }
+}
+
+.number-of-events {
+  color: white;
+}
+
+.numbers {
+    max-width: 60vw;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form } from 'react-bootstrap';
 
 import './NumberOfEvents.css';
 
@@ -12,15 +13,17 @@ class NumberOfEvents extends Component {
     render() {
         const { numberOfEvents } = this.props;
         return (
-            <div className="total-events-viewed">
-                <h6 className="search-heading">Select Number of Events to View</h6>
-                <input
-                    type="text"
+            <Form className="total-events-viewed">
+                <h5 className="search-heading">Select Number of Events to View</h5>
+                <h6 className="number-of-events">{numberOfEvents}</h6>
+                <Form.Range
                     className="numbers"
                     value={numberOfEvents}
                     onChange={this.handleInputChanged}
+                    min="1"
+                    max="50"
                 />
-            </div>
+            </Form>
         );
     }
 }
