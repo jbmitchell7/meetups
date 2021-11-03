@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Row } from 'react-bootstrap';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row } from 'react-bootstrap';
 
 import './nprogress.css';
 import './App.css';
@@ -52,14 +53,18 @@ class App extends Component {
 
   render() {
     return (
-      <>
-        <Row className="app">
+      <Container fluid className="app">
+        <Row>
           <h1 className="heading">Networking Meetups</h1>
           <CitySearch locations={this.state.locations} numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
+        </Row>
+        <Row>
           <NumberOfEvents updateCount={this.updateCount} numberOfEvents={this.state.numberOfEvents} />
+        </Row>
+        <Row>
           <EventList events={this.state.events.slice(0, this.state.numberOfEvents)} />
         </Row>
-      </>
+      </Container>
     )
   }
 }
