@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/meetups/static/css/main.4d732fbb.chunk.css",
+    "main.css": "/meetups/static/css/main.145dec56.chunk.css",
     "main.js": "/meetups/static/js/main.4c5dfd27.chunk.js",
     "main.js.map": "/meetups/static/js/main.4c5dfd27.chunk.js.map",
     "runtime-main.js": "/meetups/static/js/runtime-main.2a724dc3.js",
@@ -14,14 +14,14 @@
     "service-worker.js": "/meetups/service-worker.js",
     "service-worker.js.map": "/meetups/service-worker.js.map",
     "static/css/2.0a9ec390.chunk.css.map": "/meetups/static/css/2.0a9ec390.chunk.css.map",
-    "static/css/main.4d732fbb.chunk.css.map": "/meetups/static/css/main.4d732fbb.chunk.css.map",
+    "static/css/main.145dec56.chunk.css.map": "/meetups/static/css/main.145dec56.chunk.css.map",
     "static/js/2.0dd08807.chunk.js.LICENSE.txt": "/meetups/static/js/2.0dd08807.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2a724dc3.js",
     "static/css/2.0a9ec390.chunk.css",
     "static/js/2.0dd08807.chunk.js",
-    "static/css/main.4d732fbb.chunk.css",
+    "static/css/main.145dec56.chunk.css",
     "static/js/main.4c5dfd27.chunk.js"
   ]
 }
