@@ -1,13 +1,11 @@
 .event {
     margin-bottom: 30px;
+    opacity: 90%;
 }
 
 .event-body {
     border-radius: 20px;
     text-align: left;
-    background-color: #E58F65;
-    color: white;
-    opacity: 90%;
 }
 
 .event-summary {
@@ -25,7 +23,7 @@
     color: white;
     margin-bottom: 30px;
     border: none;
-    background-color: #B37BA4;
+    background-color: #FAA916;
 }
 
 .event-details {

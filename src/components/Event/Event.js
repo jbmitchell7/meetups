@@ -35,7 +35,7 @@ class Event extends Component {
         const date = this.dateConvert(event.start.dateTime);
 
         return (
-            <Card className="bg-dark text-white event">
+            <Card className="bg-info text-white event">
                 <Card.Body className="event-body">
                     <Card.Title className="event-summary" as="h2">{event.summary}</Card.Title>
                     <Card.Text className="event-location">City: {event.location}</Card.Text>
