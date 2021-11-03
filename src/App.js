@@ -32,6 +32,9 @@ class App extends Component {
   }
 
   updateEvents = (location, count) => {
+    this.setState({
+      currentLocation: location
+    });
     getEvents().then((events) => {
       let locationEvents = (location === 'all') ?
         events :
