@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './nprogress.css';
 import './App.css';
