@@ -64,7 +64,7 @@ class App extends Component {
         <Row>
           <NumberOfEvents updateCount={this.updateCount} numberOfEvents={this.state.numberOfEvents} />
         </Row>
-        <Row>
+        <Row className="event-list">
           <EventList events={this.state.events.slice(0, this.state.numberOfEvents)} />
         </Row>
       </Container>
