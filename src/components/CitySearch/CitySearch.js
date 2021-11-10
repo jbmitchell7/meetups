@@ -8,7 +8,7 @@ class CitySearch extends Component {
         query: '',
         suggestions: [],
         showSuggestions: undefined,
-        infoText: ''
+        warningText: ''
     }
 
     handleInputChanged = (event) => {
@@ -20,13 +20,13 @@ class CitySearch extends Component {
         if (suggestions.length === 0) {
             this.setState({
                 query: value,
-                infoText: 'We can not find the city you are looking for. Please try another city',
+                warningText: 'We can not find the city you are looking for. Please try another city',
             })
         } else {
             return this.setState({
                 query: value,
                 suggestions,
-                infoText: ''
+                warningText: ''
             });
         }
     };
@@ -44,7 +44,7 @@ class CitySearch extends Component {
         return (
             <div className="CitySearch">
                 <h5 className="search-heading">Search by City</h5>
-                <WarningAlert text={this.state.infoText} />
+                <WarningAlert text={this.state.warningText} />
                 <input
                     type="text"
                     className="city"
