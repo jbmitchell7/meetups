@@ -1,23 +1,34 @@
 import React, { Component } from 'react';
 
+import { WarningAlert } from '../Alert/Alert';
 import './CitySearch.css';
 
 class CitySearch extends Component {
     state = {
         query: '',
         suggestions: [],
-        showSuggestions: undefined
+        showSuggestions: undefined,
+        infoText: ''
     }
 
     handleInputChanged = (event) => {
         const value = event.target.value;
+        this.setState({ showSuggestions: true });
         const suggestions = this.props.locations.filter((location) => {
             return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
         });
-        this.setState({
-            query: value,
-            suggestions,
-        });
+        if (suggestions.length === 0) {
+            this.setState({
+                query: value,
+                infoText: 'We can not find the city you are looking for. Please try another city',
+            })
+        } else {
+            return this.setState({
+                query: value,
+                suggestions,
+                infoText: ''
+            });
+        }
     };
 
     handleItemClicked = (suggestion) => {
@@ -33,6 +44,7 @@ class CitySearch extends Component {
         return (
             <div className="CitySearch">
                 <h5 className="search-heading">Search by City</h5>
+                <WarningAlert text={this.state.infoText} />
                 <input
                     type="text"
                     className="city"
