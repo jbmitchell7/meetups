@@ -8,24 +8,35 @@ import './App.css';
 import EventList from './components/EventList/EventList';
 import CitySearch from './components/CitySearch/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents/NumberOfEvents';
-import { extractLocations, getEvents } from './api';
+import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
+import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 
 class App extends Component {
   state = {
     events: [],
     locations: [],
     numberOfEvents: 32,
-    currentLocation: 'all'
+    currentLocation: 'all',
+    showWelcomeScreen: undefined
   }
 
-  componentDidMount() {
+async componentDidMount() {
     this.mounted = true;
-    getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({ events, locations: extractLocations(events) });
-      }
+    const accessToken = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get("code");
+    this.setState({
+        showWelcomeScreen: !(code || isTokenValid)
     });
-  }
+    if ((code || isTokenValid) && this.mounted) {
+        getEvents().then((events) => {
+            if (this.mounted) {
+                this.setState({ events, locations: extractLocations(events) });
+            }
+        });
+    }
+}
 
   componentWillUnmount() {
     this.mounted = false;
@@ -55,6 +66,7 @@ class App extends Component {
   }
 
   render() {
+    if (this.state.showWelcomeScreen === undefined) return <div className="App" />
     return (
       <Container fluid className="app">
         <Row>
@@ -67,6 +79,7 @@ class App extends Component {
         <Row className="event-list">
           <EventList events={this.state.events.slice(0, this.state.numberOfEvents)} />
         </Row>
+        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
       </Container>
     )
   }
