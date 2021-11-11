@@ -9,7 +9,7 @@ class Alert extends Component {
     getStyle = () => {
         return {
             color: this.color,
-            'text-align': 'center'
+            textAlign: 'center'
         };
     }
 
