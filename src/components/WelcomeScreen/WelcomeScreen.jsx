@@ -5,8 +5,8 @@ function WelcomeScreen(props) {
     return props.showWelcomeScreen ?
         (
             <div className="WelcomeScreen">
-                <h1>Welcome to the Meet app</h1>
-                <h4>
+                <h1 align="center">Welcome to the Meetups App</h1>
+                <h4 align="center">
                     Log in to see upcoming events around the world for full-stack developers
                 </h4>
                 <div className="button_cont" align="center">
@@ -26,12 +26,11 @@ function WelcomeScreen(props) {
                         </button>
                     </div>
                 </div>
-                <a
-                    href="https://jakemitchell.cloud/meetups/privacy.html"
-                    rel="nofollow noopener"
-                >
-                    Privacy policy
-                </a>
+                <div align="center">
+                    <a href="https://jakemitchell.cloud/meetups/privacy.html" rel="nofollow noopener">
+                        Privacy Policy
+                    </a>
+                </div>
             </div>
         )
         : null
