@@ -27,7 +27,7 @@ function WelcomeScreen(props) {
                     </div>
                 </div>
                 <div align="center">
-                    <a href="https://jakemitchell.cloud/meetups/privacy.html" rel="nofollow noopener">
+                    <a href="/meetups/privacy.html" rel="nofollow noopener">
                         Privacy Policy
                     </a>
                 </div>

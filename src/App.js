@@ -20,23 +20,23 @@ class App extends Component {
     showWelcomeScreen: undefined
   }
 
-async componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
     const accessToken = localStorage.getItem('access_token');
     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
     this.setState({
-        showWelcomeScreen: !(code || isTokenValid)
+      showWelcomeScreen: !(code || isTokenValid)
     });
     if ((code || isTokenValid) && this.mounted) {
-        getEvents().then((events) => {
-            if (this.mounted) {
-                this.setState({ events, locations: extractLocations(events) });
-            }
-        });
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({ events, locations: extractLocations(events) });
+        }
+      });
     }
-}
+  }
 
   componentWillUnmount() {
     this.mounted = false;
@@ -68,19 +68,21 @@ async componentDidMount() {
   render() {
     if (this.state.showWelcomeScreen === undefined) return <div className="App" />
     return (
-      <Container fluid className="app">
-        <Row>
-          <h1 className="heading">Networking Meetups</h1>
-          <CitySearch locations={this.state.locations} numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
-        </Row>
-        <Row>
-          <NumberOfEvents updateCount={this.updateCount} numberOfEvents={this.state.numberOfEvents} />
-        </Row>
-        <Row className="event-list">
-          <EventList events={this.state.events.slice(0, this.state.numberOfEvents)} />
-        </Row>
+      <div>
+        <Container fluid className="app">
+          <Row>
+            <h1 className="heading">Networking Meetups</h1>
+            <CitySearch locations={this.state.locations} numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
+          </Row>
+          <Row>
+            <NumberOfEvents updateCount={this.updateCount} numberOfEvents={this.state.numberOfEvents} />
+          </Row>
+          <Row className="event-list">
+            <EventList events={this.state.events.slice(0, this.state.numberOfEvents)} />
+          </Row>
+        </Container>
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
-      </Container>
+      </div>
     )
   }
 }
