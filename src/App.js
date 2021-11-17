@@ -26,20 +26,20 @@ class App extends Component {
 
   async componentDidMount() {
     this.mounted = true;
-    const accessToken = localStorage.getItem('access_token');
-    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get("code");
-    this.setState({
-      showWelcomeScreen: !(code || isTokenValid)
+    // const accessToken = localStorage.getItem('access_token');
+    // const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    // const searchParams = new URLSearchParams(window.location.search);
+    // const code = searchParams.get("code");
+    // this.setState({
+    //   showWelcomeScreen: !(code || isTokenValid)
+    // });
+    // if ((code || isTokenValid) && this.mounted) {
+    getEvents().then((events) => {
+      if (this.mounted) {
+        this.setState({ events, locations: extractLocations(events) });
+      }
     });
-    if ((code || isTokenValid) && this.mounted) {
-      getEvents().then((events) => {
-        if (this.mounted) {
-          this.setState({ events, locations: extractLocations(events) });
-        }
-      });
-    }
+    //}
   }
 
   componentWillUnmount() {
@@ -81,7 +81,7 @@ class App extends Component {
 
   render() {
     const { locations, numberOfEvents, events } = this.state;
-    if (this.state.showWelcomeScreen === undefined) return <div className="App" />
+    //if (this.state.showWelcomeScreen === undefined) return <div className="App" />
     return (
       <div>
         <Container fluid className="app">
@@ -92,18 +92,20 @@ class App extends Component {
           <Row>
             <NumberOfEvents updateCount={this.updateCount} numberOfEvents={numberOfEvents} />
           </Row>
-          <Row className="charts">
+          <Row className="charts text-center">
             <Col lg={4} md={12} className="pie">
+              <h5 className="chart-title">Event Type Distribution for Your Selection</h5>
               <EventGenre events={events} />
             </Col>
             <Col lg={8} md={12}>
+              <h5 className="chart-title">Total Events per City Based on Selection</h5>
               <ResponsiveContainer height={400} className="scatter">
                 <ScatterChart margin={{ top: 20, right: 50, bottom: 20, left: 0, }}>
                   <CartesianGrid />
                   <XAxis type="category" dataKey="city" name="city" />
                   <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
                   <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                  <Scatter data={this.getData()} fill="#8884d8" />
+                  <Scatter data={this.getData()} fill="white" />
                 </ScatterChart>
               </ResponsiveContainer>
             </Col>
@@ -112,7 +114,7 @@ class App extends Component {
             <EventList events={events.slice(0, numberOfEvents)} />
           </Row>
         </Container>
-        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+        {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
       </div>
     )
   }
