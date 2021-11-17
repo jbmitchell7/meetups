@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import {
-  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 
 import './nprogress.css';
@@ -12,6 +12,7 @@ import EventList from './components/EventList/EventList';
 import CitySearch from './components/CitySearch/CitySearch';
 import NumberOfEvents from './components/NumberOfEvents/NumberOfEvents';
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
+import EventGenre from './components/EventGenre/EventGenre';
 import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 
 class App extends Component {
@@ -25,20 +26,20 @@ class App extends Component {
 
   async componentDidMount() {
     this.mounted = true;
-    const accessToken = localStorage.getItem('access_token');
-    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get("code");
-    this.setState({
-      showWelcomeScreen: !(code || isTokenValid)
+    // const accessToken = localStorage.getItem('access_token');
+    // const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    // const searchParams = new URLSearchParams(window.location.search);
+    // const code = searchParams.get("code");
+    // this.setState({
+    //   showWelcomeScreen: !(code || isTokenValid)
+    // });
+    // if ((code || isTokenValid) && this.mounted) {
+    getEvents().then((events) => {
+      if (this.mounted) {
+        this.setState({ events, locations: extractLocations(events) });
+      }
     });
-    if ((code || isTokenValid) && this.mounted) {
-      getEvents().then((events) => {
-        if (this.mounted) {
-          this.setState({ events, locations: extractLocations(events) });
-        }
-      });
-    }
+    //}
   }
 
   componentWillUnmount() {
@@ -79,34 +80,39 @@ class App extends Component {
   };
 
   render() {
-    if (this.state.showWelcomeScreen === undefined) return <div className="App" />
+    const { locations, numberOfEvents, events } = this.state;
+    // if (this.state.showWelcomeScreen === undefined) return <div className="App" />
     return (
       <div>
         <Container fluid className="app">
           <Row>
             <h1 className="heading">Networking Meetups</h1>
-            <CitySearch locations={this.state.locations} numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
+            <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
           </Row>
           <Row>
-            <NumberOfEvents updateCount={this.updateCount} numberOfEvents={this.state.numberOfEvents} />
+            <NumberOfEvents updateCount={this.updateCount} numberOfEvents={numberOfEvents} />
           </Row>
           <Row>
-            <ScatterChart width={400} height={400} margin={{
-              top: 20, right: 20, bottom: 20, left: 20,
-            }}
-            >
-              <CartesianGrid />
-              <XAxis type="category" dataKey="city" name="city" />
-              <YAxis type="number" dataKey="number" name="number of events" />
-              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-              <Scatter data={this.getData()} fill="#8884d8" />
-            </ScatterChart>
+            <Col>
+              <EventGenre events={events} />
+            </Col>
+            <Col>
+              <ResponsiveContainer height={400}>
+                <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20, }}>
+                  <CartesianGrid />
+                  <XAxis type="category" dataKey="city" name="city" />
+                  <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
+                  <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                  <Scatter data={this.getData()} fill="#8884d8" />
+                </ScatterChart>
+              </ResponsiveContainer>
+            </Col>
           </Row>
           <Row className="event-list">
-            <EventList events={this.state.events.slice(0, this.state.numberOfEvents)} />
+            <EventList events={events.slice(0, numberOfEvents)} />
           </Row>
         </Container>
-        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+        {/* <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} /> */}
       </div>
     )
   }
