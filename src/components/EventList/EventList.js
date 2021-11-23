@@ -10,9 +10,7 @@ class EventList extends Component {
         const { events } = this.props;
         return (
             <>
-                {!navigator.onLine ? (
-                    <WarningAlert text="You are Offline. Data may not be up-to-date." />
-                ) : ("")}
+                {!navigator.onLine && <WarningAlert text="You are Offline. Data may not be up-to-date." />}
                 {events.map(event =>
                     <Col xl={3} lg={4} md={6} key={event.id}>
                         <Event event={event} />

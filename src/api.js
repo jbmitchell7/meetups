@@ -1,6 +1,7 @@
 import axios from 'axios';
 import NProgress from 'nprogress';
 import { mockData } from './mock-data';
+import CONSTANTS from './config/api-urls'
 
 export const extractLocations = (events) => {
     var extractLocations = events.map((event) => event.location);
@@ -10,7 +11,7 @@ export const extractLocations = (events) => {
 
 export const checkToken = async (accessToken) => {
     const result = await fetch(
-        `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+        `${CONSTANTS.GOOGLE_API}/oauth2/v1/tokeninfo?access_token=${accessToken}`
     )
         .then((res) => res.json())
         .catch((error) => error.json());
@@ -50,7 +51,7 @@ export const getEvents = async () => {
 
     if (token) {
         removeQuery();
-        const url = `https://gu61ufjbbl.execute-api.us-east-2.amazonaws.com/dev/api/get-events/${token}`;
+        const url = `${CONSTANTS.AWS}/get-events/${token}`;
         const result = await axios.get(url);
         if (result.data) {
             var locations = extractLocations(result.data.events);
@@ -65,7 +66,7 @@ export const getEvents = async () => {
 const getToken = async (code) => {
     const encodeCode = encodeURIComponent(code);
     const { access_token } = await fetch(
-        `https://gu61ufjbbl.execute-api.us-east-2.amazonaws.com/dev/api/token/${encodeCode}`
+        `${CONSTANTS.AWS}/token/${encodeCode}`
     )
         .then((res) => {
             return res.json();
@@ -88,7 +89,7 @@ export const getAccessToken = async () => {
         const code = await searchParams.get("code");
         if (!code) {
             const results = await axios.get(
-                "https://gu61ufjbbl.execute-api.us-east-2.amazonaws.com/dev/api/get-auth-url"
+                `${CONSTANTS.AWS}/get-auth-url`
             );
             const { authUrl } = results.data;
             return (window.location.href = authUrl);

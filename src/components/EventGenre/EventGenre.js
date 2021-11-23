@@ -8,12 +8,10 @@ const EventGenre = ({ events }) => {
     const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
 
     const getData = () => {
-        let data = genres.map((genre) => {
+        return genres.map((genre) => {
             const value = events.filter(({ summary }) => summary.split(' ').includes(genre)).length;
             return { name: genre, value: value };
-        });
-        data = data.filter((summary) => summary.value);
-        return data;
+        }).filter((summary) => summary.value);
     };
 
     useEffect(() => { setData(() => getData()); }, [events]);

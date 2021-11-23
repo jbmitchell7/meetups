@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
+import debounce from 'lodash.debounce';
 
 import { ErrorAlert } from '../Alert/Alert';
 import './NumberOfEvents.css';
@@ -10,9 +11,8 @@ class NumberOfEvents extends Component {
         errorText: ''
     }
 
-    handleInputChanged = (event) => {
-        const value = event.target.value;
-        if (value < 0) {
+    waitForSlider = debounce(eventValue => {
+        if (eventValue < 0) {
             this.setState({
                 errorText: 'Cannot set to a negative number'
             })
@@ -20,8 +20,13 @@ class NumberOfEvents extends Component {
             this.setState({
                 errorText: ''
             })
-            return this.props.updateCount(value);
+            return this.props.updateCount(eventValue);
         }
+    }, 50)
+
+    handleInputChanged = (event) => {
+        const value = event.target.value;
+        this.waitForSlider(value);
     };
 
     render() {

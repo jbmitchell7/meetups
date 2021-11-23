@@ -15,6 +15,9 @@ import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
 import EventGenre from './components/EventGenre/EventGenre';
 import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 
+//switch to false to test locally
+const enableLogin = false
+
 class App extends Component {
   state = {
     events: [],
@@ -26,20 +29,30 @@ class App extends Component {
 
   async componentDidMount() {
     this.mounted = true;
-    const accessToken = localStorage.getItem('access_token');
-    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get("code");
-    this.setState({
-      showWelcomeScreen: !(code || isTokenValid)
-    });
-    if ((code || isTokenValid) && this.mounted) {
+
+    if (enableLogin) {
+      const accessToken = localStorage.getItem('access_token');
+      const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+      const searchParams = new URLSearchParams(window.location.search);
+      const code = searchParams.get("code");
+      this.setState({
+        showWelcomeScreen: !(code || isTokenValid)
+      });
+      if ((code || isTokenValid) && this.mounted) {
+        getEvents().then((events) => {
+          if (this.mounted) {
+            this.setState({ events, locations: extractLocations(events) });
+          }
+        });
+      }
+    } else {
       getEvents().then((events) => {
         if (this.mounted) {
           this.setState({ events, locations: extractLocations(events) });
         }
       });
     }
+
   }
 
   componentWillUnmount() {
@@ -47,9 +60,6 @@ class App extends Component {
   }
 
   updateEvents = (location, count) => {
-    this.setState({
-      currentLocation: location
-    });
     getEvents().then((events) => {
       let locationEvents = (location === 'all') ?
         events :
@@ -57,6 +67,7 @@ class App extends Component {
       locationEvents = locationEvents.slice(0, count);
       this.setState({
         events: locationEvents,
+        currentLocation: location
       });
     });
   }
@@ -81,7 +92,9 @@ class App extends Component {
 
   render() {
     const { locations, numberOfEvents, events } = this.state;
-    if (this.state.showWelcomeScreen === undefined) return <div className="App" />
+    if (enableLogin) {
+      if (this.state.showWelcomeScreen === undefined) return <div className="App" />
+    }
     return (
       <div>
         <Container fluid className="app">
@@ -114,7 +127,10 @@ class App extends Component {
             <EventList events={events.slice(0, numberOfEvents)} />
           </Row>
         </Container>
-        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+        {enableLogin &&
+          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+        }
+
       </div>
     )
   }
