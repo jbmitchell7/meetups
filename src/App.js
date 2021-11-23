@@ -16,7 +16,7 @@ import EventGenre from './components/EventGenre/EventGenre';
 import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 
 //switch to false to test locally
-const enableLogin = false
+const enableLogin = true
 
 class App extends Component {
   state = {

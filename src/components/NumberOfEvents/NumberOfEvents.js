@@ -22,7 +22,7 @@ class NumberOfEvents extends Component {
             })
             return this.props.updateCount(eventValue);
         }
-    }, 50)
+    }, 250)
 
     handleInputChanged = (event) => {
         const value = event.target.value;
