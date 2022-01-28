@@ -128,7 +128,11 @@ class App extends Component {
           </Row>
         </Container>
         {enableLogin &&
-          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+          <Container fluid>
+            <Row>
+              <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
+            </Row>
+          </Container>
         }
 
       </div>
